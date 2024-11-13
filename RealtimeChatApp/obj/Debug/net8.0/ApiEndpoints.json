@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "RealtimeChatApp.RealtimeChatApp.Business.Controllers.TestController",
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.TestController",
     "Method": "GetUserData",
     "RelativePath": "api/Test",
     "HttpMethod": "GET",
@@ -10,7 +10,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RealtimeChatApp.RealtimeChatApp.Business.Controllers.WeatherForecastController",
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
     "HttpMethod": "GET",

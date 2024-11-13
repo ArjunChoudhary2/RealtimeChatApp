@@ -12,6 +12,6 @@ namespace RealtimeChatApp.RealtimeChatApp.Domain.Entities
         [Column("user1_id")]
         public int User2_Id { get; set; }
         [Column("chat_name")]
-        public string ChatName { get; set; }
+        public string? ChatName { get; set; }
     }
 }

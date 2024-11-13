@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using RealtimeChatApp.RealtimeChatApp.Business.Services;
 
@@ -15,6 +16,7 @@ builder.Services.AddScoped<DatabaseService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddDbContext<ChatAppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection")));
 
 // Swagger and OpenAPI configuration
 builder.Services.AddEndpointsApiExplorer();
