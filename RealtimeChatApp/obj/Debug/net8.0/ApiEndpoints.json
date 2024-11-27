@@ -1,12 +1,177 @@
 [
   {
-    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.TestController",
-    "Method": "GetUserData",
-    "RelativePath": "api/Test",
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "CreateChat",
+    "RelativePath": "api/Chat",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newChat",
+        "Type": "RealtimeChatApp.RealtimeChatApp.Domain.Entities.Chats",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "GetChatById",
+    "RelativePath": "api/Chat/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "DeleteChat",
+    "RelativePath": "api/Chat/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "UpdateChatName",
+    "RelativePath": "api/Chat/{id}/updateName",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "newChatName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "GetAllChatsForUser",
+    "RelativePath": "api/Chat/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.UsersController",
+    "Method": "GetUserById",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.UsersController",
+    "Method": "SetMoodStatus",
+    "RelativePath": "api/Users/{id}/setMood",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "moodStatus",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.UsersController",
+    "Method": "UpdateUserProfile",
+    "RelativePath": "api/Users/{id}/updateProfile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedUser",
+        "Type": "RealtimeChatApp.RealtimeChatApp.Domain.Entities.Users",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.UsersController",
+    "Method": "CreateProfile",
+    "RelativePath": "api/Users/createProfile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newUser",
+        "Type": "RealtimeChatApp.RealtimeChatApp.Domain.Entities.Users",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.UsersController",
+    "Method": "SearchUsers",
+    "RelativePath": "api/Users/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

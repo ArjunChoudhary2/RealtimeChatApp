@@ -12,8 +12,17 @@ public class UserRepository : BaseRepository<Users>,IUserRepository
     {
             _context = context;
     }
+    public Users GetById(Guid id)
+        {
+            return _context.Users.Find(id);
+        }
 
-    public async Task<Users> GetByIdAsync(int id) => await _context.Users.FindAsync(id);
+        void Update(Users user)
+        {
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+    public async Task<Users> GetByIdAsync(Guid id) => await _context.Users.FindAsync(id);
 
     public async Task<IEnumerable<Users>> GetAllAsync() => await _context.Users.ToListAsync();
 
@@ -25,11 +34,10 @@ public class UserRepository : BaseRepository<Users>,IUserRepository
 
     public async Task UpdateAsync(Users user)
     {
-        _context.Users.Update(user);
-        await _context.SaveChangesAsync();
+            _context.Users.Update(user);
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Guid id)
     {
         var user = await _context.Users.FindAsync(id);
         if (user != null)

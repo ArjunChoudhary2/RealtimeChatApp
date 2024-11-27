@@ -2,11 +2,12 @@
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
 using RealtimeChatApp.RealtimeChatApp.Domain.Entities;
 using System;
+using System.Linq.Expressions;
 
 namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
 {
     
-public class UserStatusRepository : BaseRepository<Chats>,IUserStatusHistoryRepository
+public class UserStatusRepository : BaseRepository<UserStatusHistory>,IUserStatusHistoryRepository
 {
         private readonly ChatAppDbContext _context;
 

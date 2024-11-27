@@ -1,30 +1,58 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using RealtimeChatApp.RealtimeChatApp.Business.Services;
+using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository;
+using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register the Npgsql connection (you've already done this)
+// Register Npgsql connection
 builder.Services.AddScoped<NpgsqlConnection>(sp =>
 {
     var connectionString = builder.Configuration.GetConnectionString("SupabaseConnection");
     return new NpgsqlConnection(connectionString);
 });
 
-// Register DatabaseService to use in controllers
-builder.Services.AddScoped<DatabaseService>();
+// Register the DbContext with Execution Retry enabled
+//builder.Services.AddDbContext<ChatAppDbContext>(options =>
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection"), npgsqlOptions =>
+//    {
+//        npgsqlOptions.EnableRetryOnFailure(
+//            maxRetryCount: 2, // Number of retry attempts
+//            maxRetryDelay: TimeSpan.FromSeconds(5), // Max delay between retries
+//            errorCodesToAdd: null // Optional: Add specific PostgreSQL error codes for retry
+//        );
+//    })
+//);
+builder.Services.AddDbContext<ChatAppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection"))
+);
 
-// Add services to the container.
+// Register Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
+builder.Services.AddScoped<IChallangeRepository, ChallangeRepository>();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+// Add other repositories if needed
+
+// Register Services
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddScoped<IChallengeService, ChallengeService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+
+// Add controllers
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ChatAppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection")));
 
-// Swagger and OpenAPI configuration
+// Configure Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

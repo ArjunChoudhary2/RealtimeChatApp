@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
 using RealtimeChatApp.RealtimeChatApp.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
 {
     
-public class MessageMetadataRepository : BaseRepository<Users>, IMessageMetadataRepository
+public class MessageMetadataRepository : BaseRepository<MessageMetadata>, IMessageMetadataRepository
 
 {
 
@@ -41,6 +42,7 @@ public class MessageMetadataRepository : BaseRepository<Users>, IMessageMetadata
                 await _context.SaveChangesAsync();
             }
         }
+
     }
 
 }

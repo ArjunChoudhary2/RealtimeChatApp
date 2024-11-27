@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtimeChatApp.RealtimeChatApp.Domain.Entities;
+using System;
 
 public class ChatAppDbContext : DbContext
 {
@@ -22,5 +23,11 @@ public class ChatAppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         // Configure entity relationships and constraints
+        modelBuilder.Entity<Chats>()
+        .HasMany(c => c.Messages)
+        .WithOne(m => m.Chat)
+        .HasForeignKey(m => m.ChatId) // Reference the ChatId property
+        .IsRequired(); // Ensures every message is linked to a chat
+
     }
 }

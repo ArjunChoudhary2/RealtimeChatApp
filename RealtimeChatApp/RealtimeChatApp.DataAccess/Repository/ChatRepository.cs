@@ -2,6 +2,9 @@
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
 using RealtimeChatApp.RealtimeChatApp.Domain.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
 {
@@ -15,9 +18,19 @@ public class ChatRepository : BaseRepository<Chats>,IChatRepository
             _context = context;
         }
 
-        public async Task<Chats> GetByIdAsync(int id) => await _context.Chats.FindAsync(id);
+        public async Task<Chats> GetByIdAsync(Guid id) => await _context.Chats.FindAsync(id);
 
-        public async Task<IEnumerable<Chats>> GetAllAsync() => await _context.Chats.ToListAsync();
+        public async Task<IEnumerable<Chats>> GetAllAsync(Expression<Func<Chats, bool>>? filter, string? includeProperties = null) {
+            IQueryable<Chats> query = _context.Chats;
+            if (filter != null) query = query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+            return await query.ToListAsync(); }
 
         public async Task AddAsync(Chats chat)
         {
@@ -31,7 +44,7 @@ public class ChatRepository : BaseRepository<Chats>,IChatRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             var chat = await _context.Chats.FindAsync(id);
             if (chat != null)

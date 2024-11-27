@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
+using RealtimeChatApp.RealtimeChatApp.Domain.Entities;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
 {
@@ -12,9 +15,28 @@ namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
             _context = context;
         }
 
+        public T GetById(Guid id)
+        {
+            return _context.Set<T>().Find(id);
+        }
+
+        public void Update(Users user)
+        {
+            _context.Update(user);
+            _context.SaveChanges();
+        }
+
         public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FindAsync(id);
 
-        public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            return await query.ToListAsync();
+        }
 
         public async Task AddAsync(T entity)
         {
@@ -37,5 +59,31 @@ namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
+        {
+            IQueryable<T> query;
+            if (tracked)
+            {
+                query = _context.Set<T>();
+
+            }
+            else
+            {
+                query = _context.Set<T>().AsNoTracking();
+
+            }
+            query = query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+            return await query.FirstOrDefaultAsync(filter);
+        }
+
+
     }
 }
