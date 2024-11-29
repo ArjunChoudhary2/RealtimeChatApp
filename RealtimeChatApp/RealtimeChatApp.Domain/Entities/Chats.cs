@@ -16,6 +16,6 @@ namespace RealtimeChatApp.RealtimeChatApp.Domain.Entities
         public string? ChatName { get; set; }
 
         // Navigation property for related messages
-        public ICollection<Messages> Messages { get; set; }
+        public ICollection<Messages> Messages { get; set; } = null;
     }
 }

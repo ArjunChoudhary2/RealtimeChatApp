@@ -17,6 +17,22 @@
   },
   {
     "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "DeleteChat",
+    "RelativePath": "api/Chat/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
     "Method": "GetChatById",
     "RelativePath": "api/Chat/{id}",
     "HttpMethod": "GET",
@@ -33,15 +49,67 @@
   },
   {
     "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
-    "Method": "DeleteChat",
-    "RelativePath": "api/Chat/{id}",
-    "HttpMethod": "DELETE",
+    "Method": "GetMessagesByChatId",
+    "RelativePath": "api/Chat/{id}/messages",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "SendMessage",
+    "RelativePath": "api/Chat/{id}/messages",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "newMessage",
+        "Type": "RealtimeChatApp.RealtimeChatApp.Domain.Entities.Messages",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RealtimeChatApp.RealtimeChatApp.API.Controllers.ChatController",
+    "Method": "MarkMessagesAsRead",
+    "RelativePath": "api/Chat/{id}/messages/markAsRead",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "messageIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],

@@ -28,15 +28,46 @@ namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
 
         public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FindAsync(id);
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null)
+        public async Task<IEnumerable<T>> GetAllAsync(
+    Expression<Func<T, bool>>? filter = null,
+    Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+    int? skip = null,
+    int? take = null,
+    string? includeProperties = null)
         {
             IQueryable<T> query = _context.Set<T>();
+
             if (filter != null)
             {
                 query = query.Where(filter);
             }
+
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            if (skip.HasValue)
+            {
+                query = query.Skip(skip.Value);
+            }
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
             return await query.ToListAsync();
         }
+
 
         public async Task AddAsync(T entity)
         {
@@ -84,6 +115,11 @@ namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository
             return await query.FirstOrDefaultAsync(filter);
         }
 
+        public async Task UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            _context.UpdateRange(entities);
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

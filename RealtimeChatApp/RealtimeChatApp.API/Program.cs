@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using RealtimeChatApp.RealtimeChatApp.API.Hubs;
 using RealtimeChatApp.RealtimeChatApp.Business.Services;
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository;
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
@@ -46,6 +47,7 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 
 // Add controllers
 builder.Services.AddControllers();
+builder.Services.AddSignalR(); // Add SignalR service
 
 // Configure Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -63,5 +65,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<ChatHub>("/chathub"); // Map the SignalR Hub
 app.Run();
