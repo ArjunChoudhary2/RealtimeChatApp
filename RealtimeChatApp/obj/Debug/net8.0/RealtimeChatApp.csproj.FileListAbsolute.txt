@@ -1,3 +1,11 @@
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.csproj.AssemblyReference.cache
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.AssemblyInfoInputs.cache
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.AssemblyInfo.cs
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.csproj.CoreCompileInputs.cache
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.sourcelink.json
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\appsettings.json
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\RealtimeChatApp.exe
@@ -5,8 +13,10 @@ C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Rea
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\RealtimeChatApp.runtimeconfig.json
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\RealtimeChatApp.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\RealtimeChatApp.pdb
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Dapper.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Humanizer.dll
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Magic.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
@@ -34,6 +44,7 @@ C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Mic
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\MimeKit.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\Npgsql.dll
@@ -118,14 +129,6 @@ C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\tr\
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.csproj.AssemblyReference.cache
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.AssemblyInfoInputs.cache
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.AssemblyInfo.cs
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.csproj.CoreCompileInputs.cache
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\RealtimeChatApp.sourcelink.json
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\arjun\source\repos\RealtimeChatApp\RealtimeChatApp\obj\Debug\net8.0\staticwebassets\msbuild.RealtimeChatApp.Microsoft.AspNetCore.StaticWebAssets.props

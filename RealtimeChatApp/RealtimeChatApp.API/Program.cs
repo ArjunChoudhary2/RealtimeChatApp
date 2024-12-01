@@ -2,10 +2,24 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using RealtimeChatApp.RealtimeChatApp.API.Hubs;
 using RealtimeChatApp.RealtimeChatApp.Business.Services;
-using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository;
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
+using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Register CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")  // Specify the allowed origin(s)
+              .AllowAnyMethod()  // Allow all HTTP methods (GET, POST, etc.)
+              .AllowAnyHeader()  // Allow all headers
+              .AllowCredentials();  // Allow credentials (cookies, authorization headers, etc.)
+    });
+});
+
+
 
 // Register Npgsql connection
 builder.Services.AddScoped<NpgsqlConnection>(sp =>
@@ -15,16 +29,6 @@ builder.Services.AddScoped<NpgsqlConnection>(sp =>
 });
 
 // Register the DbContext with Execution Retry enabled
-//builder.Services.AddDbContext<ChatAppDbContext>(options =>
-//    options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection"), npgsqlOptions =>
-//    {
-//        npgsqlOptions.EnableRetryOnFailure(
-//            maxRetryCount: 2, // Number of retry attempts
-//            maxRetryDelay: TimeSpan.FromSeconds(5), // Max delay between retries
-//            errorCodesToAdd: null // Optional: Add specific PostgreSQL error codes for retry
-//        );
-//    })
-//);
 builder.Services.AddDbContext<ChatAppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection"))
 );
@@ -36,7 +40,6 @@ builder.Services.AddScoped<IChallangeRepository, ChallangeRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-// Add other repositories if needed
 
 // Register Services
 builder.Services.AddScoped<IUserService, UserService>();
@@ -62,6 +65,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Use CORS before UseAuthorization
+app.UseCors("AllowSpecificOrigins");
+
 app.UseAuthorization();
 
 app.MapControllers();

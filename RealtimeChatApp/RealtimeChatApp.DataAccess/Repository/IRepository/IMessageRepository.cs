@@ -9,5 +9,9 @@ namespace RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository
         Task AddAsync(Messages message);
         Task UpdateAsync(Messages message);
         Task DeleteAsync(int id);
+
+        Task<IEnumerable<Messages>> GetChatHistoryAsync(Guid user1, Guid user2);
+        
+
     }
 }

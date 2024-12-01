@@ -8,11 +8,11 @@ namespace RealtimeChatApp.RealtimeChatApp.Domain.Entities
         public int Id { get; set; }
 
         [Column("sender_id")]
-        public int SenderId { get; set; }
+        public Guid SenderId { get; set; }
 
         [Column("recevier_id")]
-        public int ReceiverId { get; set; }
-
+        public Guid ReceiverId { get; set; }
+        
         [Column("content")]
         public string Content { get; set; }
 
@@ -26,7 +26,7 @@ namespace RealtimeChatApp.RealtimeChatApp.Domain.Entities
         public bool IsChallenge { get; set; }
 
         // Foreign key property for the Chats table
-        [Column("ChatId")]
+        [ForeignKey(nameof(Chat))]
         public Guid ChatId { get; set; }
 
         // Navigation property for the parent chat

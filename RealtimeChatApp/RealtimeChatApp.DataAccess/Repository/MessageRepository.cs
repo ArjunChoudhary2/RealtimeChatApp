@@ -15,6 +15,16 @@ public class MessageRepository : BaseRepository<Messages>,IMessageRepository
             _context = context;
         }
 
+        public async Task<IEnumerable<Messages>> GetChatHistoryAsync(Guid user1, Guid user2)
+        {
+            return await _context.Messages
+                .Where(m =>
+                    (m.SenderId == user1 && m.ReceiverId == user2) ||
+                    (m.SenderId == user2 && m.ReceiverId == user1))
+                .OrderBy(m => m.Timestamp)
+                .ToListAsync();
+        }
+
         public async Task<Messages> GetByIdAsync(int id) => await _context.Messages.FindAsync(id);
 
         public async Task<IEnumerable<Messages>> GetAllAsync() => await _context.Messages.ToListAsync();

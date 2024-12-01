@@ -154,8 +154,7 @@ namespace RealtimeChatApp.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("ChatId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("chat_id");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -170,12 +169,12 @@ namespace RealtimeChatApp.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("read");
 
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("ReceiverId")
+                        .HasColumnType("uuid")
                         .HasColumnName("recevier_id");
 
-                    b.Property<int>("SenderId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uuid")
                         .HasColumnName("sender_id");
 
                     b.Property<DateTime>("Timestamp")
@@ -260,8 +259,8 @@ namespace RealtimeChatApp.Migrations
                         .HasColumnType("text")
                         .HasColumnName("mood_status");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("text")
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("bytea")
                         .HasColumnName("profile_pic");
 
                     b.Property<DateTime>("UpdatedAt")

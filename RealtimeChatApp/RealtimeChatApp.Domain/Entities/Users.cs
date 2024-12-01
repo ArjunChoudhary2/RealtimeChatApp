@@ -13,7 +13,7 @@ namespace RealtimeChatApp.RealtimeChatApp.Domain.Entities
         [Column("username")]
         public string Username { get; set; }
         [Column("profile_pic")]
-        public string? ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; }
         [Column("mood_status")]
         public string? MoodStatus { get; set; }
     }

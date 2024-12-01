@@ -22,6 +22,13 @@ namespace RealtimeChatApp.RealtimeChatApp.API.Controllers
             _hubContext = hubContext;
         }
 
+        [HttpGet("api/Chats/history")]
+        public async Task<IActionResult> GetChatHistory(Guid user1, Guid user2)
+        {
+            var messages = await _unitOfWork.Messages.GetChatHistoryAsync(user1, user2);
+            return Ok(messages);
+        }
+
         // Create a new chat
         [HttpPost]
         public async Task<IActionResult> CreateChat([FromBody] Chats newChat)

@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
+using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository;
 using RealtimeChatApp.RealtimeChatApp.DataAccess.Repository.IRepository;
 using RealtimeChatApp.RealtimeChatApp.Domain.Entities;
+using System.Net.Mime;
+using System.Reflection.PortableExecutable;
+using Magic;
 
 namespace RealtimeChatApp.RealtimeChatApp.API.Controllers
 {
@@ -20,7 +25,7 @@ namespace RealtimeChatApp.RealtimeChatApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
-            var user =  await _unitOfWork.Users.GetByIdAsync(id);
+            var user = await _unitOfWork.Users.GetByIdAsync(id);
             return user != null ? Ok(user) : NotFound("User not found");
         }
 
@@ -31,6 +36,11 @@ namespace RealtimeChatApp.RealtimeChatApp.API.Controllers
                 return BadRequest("Search query cannot be empty");
 
             var users = await _unitOfWork.Users.GetAllAsync(u => u.Username.Contains(query.Trim()));
+
+            // Check if no users were found
+            if (users == null || !users.Any())
+                return NotFound("Username not found");
+
             return Ok(users);
         }
 
@@ -47,7 +57,6 @@ namespace RealtimeChatApp.RealtimeChatApp.API.Controllers
 
             // Update user properties selectively
             user.Username = updatedUser.Username?.Trim();
-            user.ProfilePicture = updatedUser.ProfilePicture;
             user.MoodStatus = updatedUser.MoodStatus?.Trim();
 
             await _unitOfWork.Users.UpdateAsync(user);
@@ -102,6 +111,79 @@ namespace RealtimeChatApp.RealtimeChatApp.API.Controllers
             return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
         }
 
+        [HttpPost("{id}/uploadProfilePicture")]
+        public async Task<IActionResult> UploadProfilePicture(Guid id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
 
+            // Validate the user exists
+            var user = await _unitOfWork.Users.GetByIdAsync(id);
+            if (user == null)
+                return NotFound("User not found.");
+
+            try
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    // Copy file to memory stream
+                    await file.CopyToAsync(memoryStream);
+                    var fileBytes = memoryStream.ToArray();
+
+                    // Validate file type (optional, e.g., only images)
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                    if (!allowedExtensions.Contains(fileExtension))
+                        return BadRequest("Invalid file type. Only image files are allowed.");
+
+                    // Store the file as a blob in the database
+                    user.ProfilePicture = fileBytes;
+                    await _unitOfWork.Users.UpdateAsync(user);
+                    await _unitOfWork.SaveAsync();
+                }
+
+                return Ok("Profile picture uploaded successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("user/picture/{id}")]
+        public async Task<IActionResult> GetUserProfilePicture(Guid id)
+        {
+            var user = await _unitOfWork.Users.GetByIdAsync(id);
+            if (user == null || user.ProfilePicture == null)
+            {
+                return NotFound("User not found or user doesn't have profile picture.");
+            }
+
+            // Manually determine the MIME type based on the file extension
+            var mimeType = GetMimeTypeFromExtension(".jpg"); // You can use any file extension you know from the profile picture.
+
+            // Return the profile picture as a file response
+            return File(user.ProfilePicture, mimeType);
+        }
+
+
+        private string GetMimeTypeFromExtension(string fileExtension)
+        {
+            var mimeTypes = new Dictionary<string, string>
+            {
+                { ".jpg", "image/jpeg" },
+                { ".jpeg", "image/jpeg" },
+                { ".png", "image/png" },
+                { ".gif", "image/gif" },
+                { ".bmp", "image/bmp" },
+                { ".pdf", "application/pdf" },
+                // Add more MIME types as needed
+            };
+
+            // Check if the file extension exists in the dictionary, otherwise return a default MIME type
+            return mimeTypes.ContainsKey(fileExtension.ToLower())
+                ? mimeTypes[fileExtension.ToLower()]
+                : "application/octet-stream";
+        }
     }
 }
